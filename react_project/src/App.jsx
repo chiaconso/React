@@ -2,6 +2,8 @@ import { Component, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Counter from './Counter'
+
 
 class HelloWorld extends Component {
   render () {
@@ -11,14 +13,13 @@ class HelloWorld extends Component {
   }
 }
 
-
-
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
     <HelloWorld />
+    <Counter />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
