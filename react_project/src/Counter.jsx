@@ -4,13 +4,20 @@ function Counter() {
     const [count, setCount] = useState(0)
     function Increment() {
         setCount(count=> {
-         return count +1
+            return count +1
+        })
+    }
+    function Decrement() {
+        setCount(count => {
+            return count -1
         })
     }
     return(<div>
         <button onClick={Increment}>Increment</button>
         Count: {count}
-    </div>
+        <button onClick={Decrement}>Decrement</button>
+        Count: {count}
+        </div>
     )
 } 
 
