@@ -1,36 +1,24 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
-function Counter() {
-    const [count, setCount] = useState(0)
-    function Increment() {
-        setCount(count=> {
-            return count +1
-        })
-    }
-    function Decrement() {
-        setCount(count => {
-            return count -1
-        })
-    }
-    function Reset() {
-        setCount(count => {
-            return 0
-        })
-    }
-
-useEffect(() => {
-document.title = `Count:${count}`
-}, [count]);
-
-    return(<div>
-        <button onClick={Increment}>Increment</button>
-        Count: {count}
-        <button onClick={Decrement}>Decrement</button>
-        Count: {count}
-        <button onClick={Reset}>Reset</button>
-        Count: {count}
-        </div>
-    )
-} 
-
-export default Counter
+const TextInput = () => {
+    const [text, setText] = useState("");
+  
+    const handleChange = (event) => {
+      setText(event.target.value);
+    };
+  
+    return (
+      <div>
+        <input
+          type="text"
+          value={text}
+          onChange={handleChange}
+          className="border p-2 rounded w-full"
+          placeholder="Scrivi qualcosa..."
+        />
+        <p className="mt-2 text-gray-700">Valore: {text}</p>
+      </div>
+    );
+  };
+  
+  export default TextInput;
