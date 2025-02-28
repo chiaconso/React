@@ -12,6 +12,10 @@ const LoginForm = () => {
     setPassword(event.target.value);
   };
 
+  const handleSubmit = () => {
+    alert(`Username: ${username}\nPassword: ${password}`);
+  };
+
   return (
     <div className="p-4">
       <input
@@ -28,6 +32,12 @@ const LoginForm = () => {
         className="border p-2 rounded w-full mb-2"
         placeholder="Password"
       />
+       <button
+        onClick={handleSubmit}
+        className="bg-blue-500 text-white p-2 rounded w-full mt-2"
+      >
+        Submit
+      </button>
       <p className="mt-2 text-gray-700">Username: {username}</p>
       <p className="mt-2 text-gray-700">Password: {password}</p>
     </div>
