@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function Counter() {
     const [count, setCount] = useState(0)
@@ -17,6 +17,11 @@ function Counter() {
             return 0
         })
     }
+
+useEffect(() => {
+document.title = `Count:${count}`
+}, [count]);
+
     return(<div>
         <button onClick={Increment}>Increment</button>
         Count: {count}
