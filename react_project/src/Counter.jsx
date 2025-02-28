@@ -8,13 +8,19 @@ const ItemList = ({ items }) => {
     );
   };
   
+  const Card = ({ children }) => {
+    return <div className="card p-4 border rounded shadow">{children}</div>;
+  };
+  
   const App = () => {
     const items = ["Elemento 1", "Elemento 2", "Elemento 3"];
     
     return (
       <div className="p-4">
         <h1 className="text-xl font-bold mb-2">Lista di Elementi</h1>
-        <ItemList items={items} />
+        <Card>
+          <ItemList items={items} />
+        </Card>
       </div>
     );
   };
