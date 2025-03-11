@@ -1,38 +1,23 @@
-import { Component, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Counter from './Counter'
-import useFetch from './hook/useFetch'
+import React from 'react';
+import useFetch from './hook/useFetch';  // Importa il custom hook
 
+const MyApp = () => {
+  const { data, loading, error } = useFetch('https://jsonplaceholder.typicode.com/posts');
 
-class HelloWorld extends Component {
-  render () {
-    return (
-      <h1>Hello World!</h1>
-    ) 
+  if (loading) {
+    return <div>Caricamento...</div>;
   }
-}
 
-function App() {
-  const [count, setCount] = useState(0)
-  const {data, loading, error} = useFetch()
-if (loading) {
-  return <p> Caricamento </p>
-}
-if (error) {
-  return <p> Errore </p>
-} 
+  if (error) {
+    return <div>Errore: dati non recuperati {error}</div>;
+  }
 
   return (
-    <>
-    <HelloWorld />
-    <Counter />
-    data: {data}
-    loading: {loading}
-    error: {error}
-    </>
-  )
-}
+    <div>
+      <h1>Dati recuperati</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+};
 
-export default App
+export default MyApp;
