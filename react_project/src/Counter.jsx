@@ -12,7 +12,7 @@ const ItemList = ({ items }) => {
     return <div className="card p-4 border rounded shadow">{children}</div>;
   };
   
-  const App = () => {
+  const Counter = () => {
     const items = ["Elemento 1", "Elemento 2", "Elemento 3"];
     
     return (
@@ -25,5 +25,5 @@ const ItemList = ({ items }) => {
     );
   };
   
-  export default App;
+  export default Counter;
   
