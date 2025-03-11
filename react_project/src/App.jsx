@@ -1,23 +1,14 @@
 import React from 'react';
-import useFetch from './hook/useFetch';  // Importa il custom hook
+import TextInput from './hook/TextInput';
 
-const MyApp = () => {
-  const { data, loading, error } = useFetch('https://jsonplaceholder.typicode.com/posts');
-
-  if (loading) {
-    return <div>Caricamento...</div>;
-  }
-
-  if (error) {
-    return <div>Errore: dati non recuperati {error}</div>;
-  }
-
+const App = () => {
   return (
     <div>
-      <h1>Dati recuperati</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <h1>Gestione dell'Input di Testo</h1>
+      <TextInput />
     </div>
   );
 };
 
-export default MyApp;
+export default App;
+
