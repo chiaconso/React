@@ -1,21 +1,26 @@
-// TodoList.js
-import React, { useState, useCallback, useMemo } from 'react';
-import useFetch from './useFetch'; // Importiamo il hook per ottenere i dati
-import useFilteredTodos from './useFilteredTodos'; // Importiamo il hook per filtrare i to-do
+import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react';
+import useFetch from './useFetch'; 
+import useFilteredTodos from './useFilteredTodos'; 
 
 const TodoList = () => {
   const { data: todos, loading, error } = useFetch('https://jsonplaceholder.typicode.com/todos');
-  const [searchTerm, setSearchTerm] = useState(''); // Stato per il termine di ricerca
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // Utilizziamo useCallback per memorizzare la funzione di gestione dell'input di ricerca
+  const searchInputRef = useRef(null);
+
   const handleSearchChange = useCallback((e) => {
-    setSearchTerm(e.target.value); // Aggiorniamo il termine di ricerca
-  }, []); // La funzione non dipende da nulla, quindi l'array di dipendenze è vuoto
+    setSearchTerm(e.target.value); 
+  }, []); 
 
-  // Memorizziamo la lista dei to-do filtrati per evitare ricalcoli inutili
   const filteredTodos = useMemo(() => {
     return useFilteredTodos(todos, searchTerm);
-  }, [todos, searchTerm]); // La lista verrà ricalcolata solo se 'todos' o 'searchTerm' cambiano
+  }, [todos, searchTerm]); 
+
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus(); 
+    }
+  }, []); 
 
   if (loading) {
     return <div>Caricamento in corso...</div>;
@@ -29,10 +34,11 @@ const TodoList = () => {
     <div>
       <h1>Lista di To-Do</h1>
       <input
+        ref={searchInputRef} 
         type="text"
         placeholder="Cerca to-do..."
         value={searchTerm}
-        onChange={handleSearchChange} // Gestiamo il termine di ricerca con la funzione memorizzata
+        onChange={handleSearchChange} 
       />
       <ul>
         {filteredTodos.length === 0 ? (
