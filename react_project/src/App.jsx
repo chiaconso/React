@@ -1,7 +1,6 @@
-// App.js
 import React from 'react';
-import { TodoProvider } from './TodoContext'; // Importiamo il provider
-import TodoList from './TodoList';  // Importiamo il componente TodoList
+import { TodoProvider } from './TodoContext'; 
+import TodoList from './TodoList'; 
 
 const App = () => {
   return (

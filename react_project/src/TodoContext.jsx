@@ -1,26 +1,42 @@
-// TodoContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
-// Crea il contesto per i to-do
 const TodoContext = createContext();
 
-// Il provider del contesto che fornisce lo stato e la funzione di aggiornamento
 export const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
-  
-  // Funzione per aggiornare la lista dei to-do
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+        if (!response.ok) {
+          throw new Error('Errore nel recupero dei dati');
+        }
+        const data = await response.json();
+        setTodos(data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchTodos();
+  }, []);
+
   const updateTodos = (newTodos) => {
     setTodos(newTodos);
   };
 
   return (
-    <TodoContext.Provider value={{ todos, updateTodos }}>
+    <TodoContext.Provider value={{ todos, updateTodos, loading, error }}>
       {children}
     </TodoContext.Provider>
   );
 };
 
-// Hook personalizzato per accedere al contesto
 export const useTodos = () => {
   const context = useContext(TodoContext);
   if (!context) {
