@@ -1,11 +1,16 @@
 // TodoList.js
-import React, { useState } from 'react';
-import useFetch from './hook/useFetch'; // Importiamo il hook per ottenere i dati
-import useFilteredTodos from './useFilteredTodos'; // Importiamo il hook per filtrare i to-do
+import React, { useState, useCallback } from 'react';
+import useFetch from './useFetch'; 
+import useFilteredTodos from './useFilteredTodos';
 
 const TodoList = () => {
   const { data: todos, loading, error } = useFetch('https://jsonplaceholder.typicode.com/todos');
-  const [searchTerm, setSearchTerm] = useState(''); // Stato per il termine di ricerca
+  const [searchTerm, setSearchTerm] = useState(''); 
+
+  // Utilizziamo useCallback per memorizzare la funzione di gestione dell'input di ricerca
+  const handleSearchChange = useCallback((e) => {
+    setSearchTerm(e.target.value); 
+  }, []); 
 
   const filteredTodos = useFilteredTodos(todos, searchTerm); // Filtriamo i to-do con il termine di ricerca
 
@@ -24,7 +29,7 @@ const TodoList = () => {
         type="text"
         placeholder="Cerca to-do..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} // Gestiamo il termine di ricerca
+        onChange={handleSearchChange} // Gestiamo il termine di ricerca con la funzione memorizzata
       />
       <ul>
         {filteredTodos.length === 0 ? (
