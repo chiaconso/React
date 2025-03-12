@@ -1,12 +1,13 @@
+// TodoList.js
 import React, { useState } from 'react';
-import useFetch from './useFetch'; // Hook per ottenere i dati
-import useFilteredTodos from './useFilteredTodos'; // Hook per filtrare i to-do
+import useFetch from './hook/useFetch'; // Importiamo il hook per ottenere i dati
+import useFilteredTodos from './useFilteredTodos'; // Importiamo il hook per filtrare i to-do
 
 const TodoList = () => {
   const { data: todos, loading, error } = useFetch('https://jsonplaceholder.typicode.com/todos');
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const filteredTodos = useFilteredTodos(todos, searchTerm); // Filtriamo i to-do
+  const [searchTerm, setSearchTerm] = useState(''); // Stato per il termine di ricerca
+
+  const filteredTodos = useFilteredTodos(todos, searchTerm); // Filtriamo i to-do con il termine di ricerca
 
   if (loading) {
     return <div>Caricamento in corso...</div>;
@@ -26,12 +27,16 @@ const TodoList = () => {
         onChange={(e) => setSearchTerm(e.target.value)} // Gestiamo il termine di ricerca
       />
       <ul>
-        {filteredTodos.map(todo => (
-          <li key={todo.id}>
-            <input type="checkbox" checked={todo.completed} readOnly />
-            {todo.title}
-          </li>
-        ))}
+        {filteredTodos.length === 0 ? (
+          <div>Nessun to-do trovato</div>
+        ) : (
+          filteredTodos.map(todo => (
+            <li key={todo.id}>
+              <input type="checkbox" checked={todo.completed} readOnly />
+              {todo.title}
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
