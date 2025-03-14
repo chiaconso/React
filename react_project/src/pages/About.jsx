@@ -1,13 +1,11 @@
+// src/pages/About.js
 import React from 'react';
 
 const About = () => {
   return (
     <div>
-      <h2>Informazioni sull'App</h2>
-      <p>
-        Questa è una semplice applicazione che ti permette di gestire i tuoi To-Do.
-        Puoi aggiungere, modificare o rimuovere attività per restare sempre organizzato.
-      </p>
+      <h1>Informazioni sull'App</h1>
+      <p>Questa è una semplice app per gestire la lista dei to-do.</p>
     </div>
   );
 };

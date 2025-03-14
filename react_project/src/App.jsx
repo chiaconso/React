@@ -1,24 +1,28 @@
 import React from 'react';
-import useFetch from './hook/useFetch';  // Importa il custom hook
+import { Routes, Route, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
 
-const MyApp = () => {
-  const { data, loading, error } = useFetch('https://jsonplaceholder.typicode.com/posts');
-  
-  if (loading) {
-    return <div>Caricamento...</div>;
-  }
-  
-  
-  if (error) {
-    return <div>Errore: dati non recuperati {error}</div>;
-  }
-  
+const App = () => {
   return (
     <div>
-    <h1>Dati recuperati</h1>
-    <pre>{JSON.stringify(data, null, 2)}</pre>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </div>
   );
 };
 
-export default MyApp;
+export default App;

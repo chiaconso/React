@@ -1,15 +1,16 @@
-import React from 'react';
+// src/pages/Home.js
+import React, { useState } from 'react';
 
 const Home = () => {
-  const todos = [
-    { id: 1, text: 'Comprare il pane' },
-    { id: 2, text: 'Finire il progetto' },
-    { id: 3, text: 'Fare la spesa' },
-  ];
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'Compra il latte' },
+    { id: 2, text: 'Studia per l\'esame' },
+    { id: 3, text: 'Fai la spesa' },
+  ]);
 
   return (
     <div>
-      <h2>Lista dei To-Do</h2>
+      <h1>Lista dei To-Do</h1>
       <ul>
         {todos.map(todo => (
           <li key={todo.id}>{todo.text}</li>
