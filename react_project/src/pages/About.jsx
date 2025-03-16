@@ -1,11 +1,18 @@
-// src/pages/About.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';  
 
 const About = () => {
+  const navigate = useNavigate();
+
+  const goToHome = () => {
+    navigate('/');  
+  };
+
   return (
     <div>
-      <h1>Informazioni sull'App</h1>
-      <p>Questa è una semplice app per gestire la lista dei to-do.</p>
+      <h1>About Page</h1>
+      <p>This is the About page.</p>
+      <button onClick={goToHome}>Go to Home</button>
     </div>
   );
 };
