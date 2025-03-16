@@ -1,56 +1,22 @@
-import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
-import { useTodos } from './TodoContext'; 
-import useFilteredTodos from './useFilteredTodos'; 
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TodoList = () => {
-  const { todos, updateTodos, loading, error } = useTodos(); 
-  const [searchTerm, setSearchTerm] = useState(''); 
-
-  const searchInputRef = useRef(null);
-
-  const handleSearchChange = useCallback((e) => {
-    setSearchTerm(e.target.value); 
-  }, []); 
-
-  const filteredTodos = useMemo(() => {
-    return useFilteredTodos(todos, searchTerm);
-  }, [todos, searchTerm]); 
-
-  useEffect(() => {
-    if (searchInputRef.current) {
-      searchInputRef.current.focus(); 
-    }
-  }, []); 
-
-  if (loading) {
-    return <div>Caricamento in corso...</div>;
-  }
-
-  if (error) {
-    return <div>Si è verificato un errore: {error}</div>;
-  }
+  const todos = [
+    { id: 1, title: 'Learn React' },
+    { id: 2, title: 'Build a to-do app' },
+    { id: 3, title: 'Master JavaScript' }
+  ];
 
   return (
     <div>
-      <h1>Lista di To-Do</h1>
-      <input
-        ref={searchInputRef} 
-        type="text"
-        placeholder="Cerca to-do..."
-        value={searchTerm}
-        onChange={handleSearchChange} 
-      />
+      <h1>Todo List</h1>
       <ul>
-        {filteredTodos.length === 0 ? (
-          <div>Nessun to-do trovato</div>
-        ) : (
-          filteredTodos.map(todo => (
-            <li key={todo.id}>
-              <input type="checkbox" checked={todo.completed} readOnly />
-              {todo.title}
-            </li>
-          ))
-        )}
+        {todos.map(todo => (
+          <li key={todo.id}>
+            <Link to={`/todo/${todo.id}`}>{todo.title}</Link>
+          </li>
+        ))}
       </ul>
     </div>
   );
